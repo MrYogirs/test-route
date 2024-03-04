@@ -1,0 +1,22 @@
+td{
+    margin: 10px;
+    width: 50%;
+    border-top: none;
+    border-bottom: none;
+    font-size: medium;
+}
+
+.Konten{
+    margin-top: 10px;
+    font-size: small;
+}
+
+.JudulJadwal{
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.judul{
+    text-align: center;
+    margin-top: 10px;
+}

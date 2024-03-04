@@ -1,0 +1,7 @@
+{
+  "name": "UINSISamarinda",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
