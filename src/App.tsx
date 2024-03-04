@@ -38,12 +38,19 @@ const URL = {
   tab1: "/tab1",
   tab2: "/tab2",
 
-  riwayat: "https://apis.uinsi.ac.id/api/v1/saku/riwayatMengajar?key=b7162f79269d91cb13826c7e2b408ff8d8643873e3d1f495d265fcf74836fc51&nip=198708212022031002"
+  riwayat: "https://apis.uinsi.ac.id/api/v1/saku/riwayatMengajar?key=b7162f79269d91cb13826c7e2b408ff8d8643873e3d1f495d265fcf74836fc51&nip=198708212022031002",
+  detailRiwayat: "https://apis.uinsi.ac.id/api/v1/saku/detailRiwayatMengajar?key=b7162f79269d91cb13826c7e2b408ff8d8643873e3d1f495d265fcf74836fc51&nip=197707062011011006&semid=20231"
 }
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
+        <Route exact path={URL.tab1}>
+          <Tab1 />
+        </Route>
+        <Route exact path="/">
+          <Redirect to={URL.tab1} />
+        </Route>
       <IonRouterOutlet>
         <IonTabs>
           <IonTabBar slot="bottom">
