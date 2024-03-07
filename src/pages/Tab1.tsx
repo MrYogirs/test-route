@@ -9,11 +9,18 @@ interface RiwayatMengajar {
   sks: number;
 }
 
+interface GetSemid {
+  semid: number;
+}
 const Tab1: React.FC = () => {
   const [riwayatMengajar, setRiwayatMengajar] = useState<[RiwayatMengajar]> ([{
     semid: "",
     sks: 0,
   }]);
+  
+  const[getSemid, setgetSemid] = useState<GetSemid> ({
+    semid: 0,
+  });
 
   useIonViewDidEnter(() => {
     axios.get(URL.riwayat).then((res) => {
@@ -21,6 +28,7 @@ const Tab1: React.FC = () => {
         if (res.data.code == 200) {
           const resultData = res.data.data;
           setRiwayatMengajar(resultData);
+          setgetSemid(resultData);
         }
       }
     }).catch((err) => {
@@ -43,7 +51,7 @@ const Tab1: React.FC = () => {
           </IonHeader>
         </IonCard>
         {riwayatMengajar.map((row: RiwayatMengajar, index: number) =>(          
-        <IonCard color={'light'} href={URL.tab2}>          
+        <IonCard color={'light'} href={URL.tab2} key={getSemid.semid} onClick={() => setgetSemid(getSemid)}>          
           <IonCardHeader color={'dark'}>
             <IonCardTitle className='JudulJadwal'>
               <IonText color={'light'}><h6>{row.semid}</h6></IonText>
@@ -55,7 +63,7 @@ const Tab1: React.FC = () => {
                 <td>
                   Beban SKS
                 </td>
-                <td>
+                <td align='right'>
                   {row.sks}
                 </td>
               </tr>

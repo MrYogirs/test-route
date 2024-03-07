@@ -7,12 +7,16 @@ import axios from 'axios';
 interface DetailRiwayat {
   matakuliah: string;
   nama_kelas: string;
+  prodi: string;
+  sks: number;
 }
 
 const Tab2: React.FC = () => {
   const [detailRiwayat, setDetailRiwayat] = useState<[DetailRiwayat]> ([{
     matakuliah: "",
     nama_kelas: "",
+    prodi: "",
+    sks: 0,
   }]);
 
   useIonViewDidEnter(() => {
@@ -40,14 +44,13 @@ const Tab2: React.FC = () => {
           <IonCard color={'light'}>          
             <IonCardHeader color={'dark'}>
               <IonCardTitle className='JudulJadwal'>
-                <IonText color={'light'}><h6>{row.matakuliah}</h6></IonText>
+                <IonText color={'light'}><h6>{row.nama_kelas}</h6></IonText>
               </IonCardTitle>
             </IonCardHeader>
             <IonCardContent className='Konten'>
-              <IonText>{row.nama_kelas}</IonText><br></br>
-              <IonText>Matakuliah</IonText><br></br>
-              <IonText>Prodi</IonText><br></br>
-              <IonText>SKS</IonText>
+              <IonText>{row.matakuliah}</IonText><br></br>
+              <IonText>{row.prodi}</IonText><br></br>
+              <IonText>{row.sks} SKS</IonText>
             </IonCardContent>
           </IonCard>
         ))}
