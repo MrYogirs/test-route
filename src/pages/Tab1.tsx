@@ -3,6 +3,7 @@ import './Tab1.css';
 import { URL } from '../App';
 import { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 interface RiwayatMengajar {
   semid: string;
@@ -13,12 +14,12 @@ interface GetSemid {
   semid: number;
 }
 const Tab1: React.FC = () => {
-  const [riwayatMengajar, setRiwayatMengajar] = useState<[RiwayatMengajar]> ([{
+  const [riwayatMengajar, setRiwayatMengajar] = useState<[RiwayatMengajar]>([{
     semid: "",
     sks: 0,
   }]);
-  
-  const[getSemid, setgetSemid] = useState<GetSemid> ({
+
+  const [getSemid, setgetSemid] = useState<GetSemid>({
     semid: 0,
   });
 
@@ -50,26 +51,28 @@ const Tab1: React.FC = () => {
             <IonTitle className='judul' size="small">(Tap semester dibawah ini untuk menampilkan detail riwayat mengajar)</IonTitle>
           </IonHeader>
         </IonCard>
-        {riwayatMengajar.map((row: RiwayatMengajar, index: number) =>(          
-        <IonCard color={'light'} href={URL.tab2} key={getSemid.semid} onClick={() => setgetSemid(getSemid)}>          
-          <IonCardHeader color={'dark'}>
-            <IonCardTitle className='JudulJadwal'>
-              <IonText color={'light'}><h6>{row.semid}</h6></IonText>
-            </IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent className='Konten'>
-            <table>
-              <tr>
-                <td>
-                  Beban SKS
-                </td>
-                <td align='right'>
-                  {row.sks}
-                </td>
-              </tr>
-            </table>
-          </IonCardContent>
-        </IonCard>
+        {riwayatMengajar.map((row: RiwayatMengajar) => (
+         <Link to={{ pathname: "/tab2", state: { row } }} key={getSemid.semid} >
+            <IonCard color={'light'} onClick={() => setgetSemid(getSemid)}>
+              <IonCardHeader color={'dark'}>
+                <IonCardTitle className='JudulJadwal'>
+                  <IonText color={'light'}><h6>{row.semid}</h6></IonText>
+                </IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent className='Konten'>
+                <table>
+                  <tr>
+                    <td>
+                      Beban SKS
+                    </td>
+                    <td align='right'>
+                      {row.sks}
+                    </td>
+                  </tr>
+                </table>
+              </IonCardContent>
+            </IonCard>
+          </Link>
         ))}
       </IonContent>
     </IonPage>

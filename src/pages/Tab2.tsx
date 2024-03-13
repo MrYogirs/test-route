@@ -3,6 +3,7 @@ import './Tab2.css';
 import { URL } from '../App';
 import { useState } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router';
 
 interface DetailRiwayat {
   matakuliah: string;
@@ -12,7 +13,10 @@ interface DetailRiwayat {
 }
 
 const Tab2: React.FC = () => {
-  const [detailRiwayat, setDetailRiwayat] = useState<[DetailRiwayat]> ([{
+  const location = useLocation();
+  const semid = location.state.row.semid;
+  console.log(semid);
+  const [detailRiwayat, setDetailRiwayat] = useState<[DetailRiwayat]>([{
     matakuliah: "",
     nama_kelas: "",
     prodi: "",
@@ -20,7 +24,7 @@ const Tab2: React.FC = () => {
   }]);
 
   useIonViewDidEnter(() => {
-    axios.get(`${URL.detailRiwayat}&semid=20231`).then((res) => {
+    axios.get(`${URL.detailRiwayat}&semid=${semid}`).then((res) => {
       if (res.status == 200) {
         if (res.data.code == 200) {
           const resultData = res.data.data;
@@ -39,9 +43,9 @@ const Tab2: React.FC = () => {
           <IonTitle>DETAIL RIWAYAT MENGAJAR</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen> 
-        {detailRiwayat.map((row: DetailRiwayat, index: number) =>(          
-          <IonCard color={'light'}>          
+      <IonContent fullscreen>
+        {detailRiwayat.map((row: DetailRiwayat, index: number) => (
+          <IonCard color={'light'} key={index}>
             <IonCardHeader color={'dark'}>
               <IonCardTitle className='JudulJadwal'>
                 <IonText color={'light'}><h6>{row.nama_kelas}</h6></IonText>
